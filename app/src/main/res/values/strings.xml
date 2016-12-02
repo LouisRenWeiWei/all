@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">all</string>
+    <string name="network_error">亲~网络不给力呢...</string>
+    <string name="network_error_load">亲~网络加载失败</string>
+</resources>

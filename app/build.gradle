@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+android {
+    compileSdkVersion LIBRARY_COMPILE_SDK_VERSION
+    buildToolsVersion LIBRARY_BUILD_TOOLS_VERSION
+    defaultConfig {
+        applicationId "com.wwren.all"
+        minSdkVersion LIBRARY_MIN_SDK_VERSION
+        targetSdkVersion LIBRARY_TARGET_SDK_VERSION
+        multiDexEnabled true
+    }
+
+//    signingConfigs {
+//        mycofig {
+//            keyAlias 'igoda'
+//            keyPassword 'wei626786481'
+//            storeFile file('../igodakey')
+//            storePassword 'wei626786481'
+//        }
+//    }
+
+    compileOptions {
+        sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_7
+        targetCompatibility org.gradle.api.JavaVersion.VERSION_1_7
+    }
+
+
+    buildTypes {
+        debug{
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.mycofig
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.mycofig
+        }
+    }
+
+    packagingOptions {
+        //exclude 'META-INF/LICENSE'
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.android.support:recyclerview-v7:25.0.0'
+    compile 'com.android.support:support-v4:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile project(':network')
+    compile project(':utils')
+}
